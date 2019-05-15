@@ -1,0 +1,26 @@
+{
+  "name": "axios-adapter-logger",
+  "version": "0.1.0",
+  "description": "Adapter Based Logger",
+  "main": "index.js",
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "mocha": "^6.1.4"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gofynd/axios-adapter-logger.git"
+  },
+  "author": "Jigar Dafda<jigar.dafda@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gofynd/axios-adapter-logger/issues"
+  },
+  "homepage": "https://github.com/gofynd/axios-adapter-logger#readme"
+}
