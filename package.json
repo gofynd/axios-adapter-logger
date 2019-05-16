@@ -4,11 +4,12 @@
   "description": "Adapter Based Logger",
   "main": "index.js",
   "dependencies": {
-    "mongodb": "^3.2.4"
+    "flat": "^4.1.0"
   },
   "devDependencies": {
     "axios": "^0.18.0",
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "mongodb": "^3.2.4"
   },
   "scripts": {
     "test": "mocha"

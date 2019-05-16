@@ -1,7 +1,7 @@
 function ConsoleAdapter(argument) {
     return {
         log: function (logData){
-             console.log(JSON.stringify(logData, null, 4));
+             console.log(JSON.stringify(logData));
         }
     };
 }
