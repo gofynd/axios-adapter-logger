@@ -6,11 +6,11 @@
 
 Axios middleware to log request meta into file, databases or queues. this uses [axios interceptors](https://github.com/axios/axios#interceptors) mechanism to get the request information and then normalize it to simple json and then stores in the specified stores. these stores are called plugs. many of the plugs are provided out-of-box or developers can also create thier own or raise PR to this repo too.
 
-#### Features
+## Features
   - ease of use
   - out-of-box plugs
 
-#### Installation
+## Installation
 
 This is a [Node.js](https://nodejs.org/en/) module available through the [npm registry](https://www.npmjs.com/).
 
@@ -22,19 +22,18 @@ Installation is done using the [`npm install` command](https://docs.npmjs.com/ge
 $ npm install --save axios-adapter-logger
 ```
 
-### Available Plugs
+## Available Plugs
 
-below are out-box-avaible plugs:
+Below are out-box-avaible plugs:
 
-* Console
-* File
-* MongoDB
+* [Console](#console)
+* [File](#file)
+* [MongoDB](#mongodb)
+* [Postgres](#postgres)
 * ~~Mongoose [todo]~~
-* ~~Postgres [todo]~~
 
-#### Console
+### Console
 
-this 
 
 ```js
 const axios = require('axios');
@@ -47,7 +46,7 @@ AxiosAdapterLogger(axiosInstance, [
 axiosInstance.get('https://postman-echo.com/get?foo1=bar1&foo2=bar2')
 ```
 
-#### File
+### File
 
 ```js
 const axios = require('axios');
@@ -58,13 +57,13 @@ const options = {
     format: 'ndjson' // possible options: ndjson or csv
 };
 AxiosAdapterLogger(axiosInstance, [
-    require('../adaptors/console')(filePath, options)
+    require('axios-adapter-logger/adaptors/file')(filePath, options)
 ]);
 
 axiosInstance.get('https://postman-echo.com/get?foo1=bar1&foo2=bar2')
 ```
 
-#### MongoDB
+### MongoDB
 
 ```js
 const MongoClient = require('mongodb').MongoClient;
@@ -80,7 +79,7 @@ MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
     console.log('Database connected');
 
     AxiosAdapterLogger(axiosInstance, [
-        require('../adaptors/console')(client, 'test_database', 'test_req_logs_coll')
+        require('axios-adapter-logger/adaptors/mongodb')(client, 'test_database', 'test_req_logs_coll')
     ]);
 
     axiosInstance.get('https://postman-echo.com/get?foo1=bar1&foo2=bar2');
@@ -89,7 +88,7 @@ MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
 
 ```
 
-#### Postgres [TODO]
+### Postgres [TODO]
 
 
 ```js
@@ -101,7 +100,7 @@ const axiosInstance = axios.create();
 const client = new Client();
 
 AxiosAdapterLogger(axiosInstance, [
-    require('../adaptors/console')(client, 'test-table')
+    require('axios-adapter-logger/adaptors/postgres')(client, 'test-table')
 ]);
 
 axiosInstance.get('https://postman-echo.com/get?foo1=bar1&foo2=bar2');
@@ -109,10 +108,11 @@ axiosInstance.get('https://postman-echo.com/get?foo1=bar1&foo2=bar2');
 ```
 
 
-### Development
+## Development
 Want to contribute? Great!, Just raise a PR.
 
-### Running and testing locally
+
+## Running and testing locally
 
 clone this repo and install npm dependencies, then run following command:
 
@@ -120,14 +120,37 @@ clone this repo and install npm dependencies, then run following command:
 $ npm test
 ```
 
-### Todos
+## Todos
 
  - Add plugs - Memory, Streams, Mongoose, BigQuery, RedShift etc..
 
-### People
+
+## People
 
 Maintainer - [Jigar Dafda](https://github.com/jigardafda)
 
-### License
+## License
 ----
-MIT
+
+MIT License
+
+Copyright (c) 2019 Fynd
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
