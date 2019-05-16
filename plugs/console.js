@@ -1,4 +1,4 @@
-function ConsoleAdapter(argument) {
+function ConsolePlug() {
     return {
         log: function (logData){
              console.log(JSON.stringify(logData));
@@ -6,4 +6,4 @@ function ConsoleAdapter(argument) {
     };
 }
 
-module.exports = ConsoleAdapter;
+module.exports = ConsolePlug;

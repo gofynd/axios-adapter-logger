@@ -7,12 +7,11 @@ const FormatHandler = {
     }
 };
 
-function FileAdapter(options) {
+function FilePlug(filePath, options) {
     options = options || {};
-    const pPath = options.path || '';
     const format = options.format || 'ndjson';
 
-    if(!pPath) {
+    if(!filePath) {
         throw new Error('path is mandatory for FileAdapter');
     }
 
@@ -20,7 +19,7 @@ function FileAdapter(options) {
         log: function (logData){
             return new Promise(function (resolve, reject) {
                 const wStr = FormatHandler[format](logData) + '\n';
-                fs.appendFile(pPath, wStr, { flag: 'a+' }, function (err) {
+                fs.appendFile(filePath, wStr, { flag: 'a+' }, function (err) {
                     if(err) {
                         reject(err);
                         return;
@@ -32,4 +31,4 @@ function FileAdapter(options) {
     }
 }
 
-module.exports = FileAdapter;
+module.exports = FilePlug;

@@ -3,13 +3,20 @@
   "version": "0.1.1",
   "description": "Adapter Based Logger",
   "main": "index.js",
+  "keywords": [
+    "axios",
+    "logger",
+    "middleware",
+    "mongodb"
+  ],
   "dependencies": {
     "flat": "^4.1.0"
   },
   "devDependencies": {
     "axios": "^0.18.0",
     "mocha": "^6.1.4",
-    "mongodb": "^3.2.4"
+    "mongodb": "^3.2.4",
+    "pg": "^7.11.0"
   },
   "scripts": {
     "test": "mocha"

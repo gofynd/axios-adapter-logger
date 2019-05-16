@@ -4,7 +4,7 @@ const path = require('path');
 const axios = require('axios');
 const MongoClient = require('mongodb').MongoClient;
 
-const AdapterMiddlware = require('../index');
+const AxiosAdapterLogger = require('../index');
 
 const TEST_URLS = {
     VALID_GET_200: "https://postman-echo.com/get?foo1=bar1&foo2=bar2",
@@ -18,21 +18,21 @@ describe('Test Adaptors', function() {
 
         it('GET Success', function() {
             const axiosInstance = axios.create();
-            AdapterMiddlware(axiosInstance, [require('../adaptors/console')()]);
+            AxiosAdapterLogger(axiosInstance, [require('../plugs/console')()]);
 
             return axiosInstance.get(TEST_URLS.VALID_GET_200);
         });
 
         it('GET system error', function() {
             const axiosInstance = axios.create();
-            AdapterMiddlware(axiosInstance, [require('../adaptors/console')()]);
+            AxiosAdapterLogger(axiosInstance, [require('../plugs/console')()]);
 
             return axiosInstance.get(TEST_URLS.INVALID_GET_NO_DOMAIN).catch(e => e);
         });
 
         it('GET 404', function() {
             const axiosInstance = axios.create();
-            AdapterMiddlware(axiosInstance, [require('../adaptors/console')()]);
+            AxiosAdapterLogger(axiosInstance, [require('../plugs/console')()]);
 
             return axiosInstance.get(TEST_URLS.VALID_GET_200).catch(e => e);
         });
@@ -55,30 +55,24 @@ describe('Test Adaptors', function() {
 
         it('GET Success', function() {
             const axiosInstance = axios.create();
-            const options = {
-                path: this.tmpPath
-            };
-            AdapterMiddlware(axiosInstance, [require('../adaptors/file')(options)]);
+            const options = {};
+            AxiosAdapterLogger(axiosInstance, [require('../plugs/file')(this.tmpPath, options)]);
 
             return axiosInstance.get(TEST_URLS.VALID_GET_200);
         });
 
         it('GET system error', function() {
             const axiosInstance = axios.create();
-            const options = {
-                path: this.tmpPath
-            };
-            AdapterMiddlware(axiosInstance, [require('../adaptors/file')(options)]);
+            const options = {};
+            AxiosAdapterLogger(axiosInstance, [require('../plugs/file')(this.tmpPath, options)]);
 
             return axiosInstance.get(TEST_URLS.INVALID_GET_NO_DOMAIN).catch(e => e);
         });
 
         it('GET 404', function() {
             const axiosInstance = axios.create();
-            const options = {
-                path: this.tmpPath
-            };
-            AdapterMiddlware(axiosInstance, [require('../adaptors/file')(options)]);
+            const options = {};
+            AxiosAdapterLogger(axiosInstance, [require('../plugs/file')(this.tmpPath, options)]);
 
             return axiosInstance.get(TEST_URLS.VALID_GET_200).catch(e => e);
         });
@@ -98,7 +92,6 @@ describe('Test Adaptors', function() {
                 }
                 _this.client = client;
                 _this.mongoOptions = {
-                    'client': _this.client,
                     'database': "test_axios",
                     'collection': 'axios_logs'
                 };
@@ -119,21 +112,21 @@ describe('Test Adaptors', function() {
 
         it('GET Success', function() {
             const axiosInstance = axios.create();
-            AdapterMiddlware(axiosInstance, [require('../adaptors/mongodb')(this.mongoOptions)]);
+            AxiosAdapterLogger(axiosInstance, [require('../plugs/mongodb')(this.client, this.mongoOptions)]);
 
             return axiosInstance.get(TEST_URLS.VALID_GET_200);
         });
 
         it('GET system error', function() {
             const axiosInstance = axios.create();
-            AdapterMiddlware(axiosInstance, [require('../adaptors/mongodb')(this.mongoOptions)]);
+            AxiosAdapterLogger(axiosInstance, [require('../plugs/mongodb')(this.client, this.mongoOptions)]);
 
             return axiosInstance.get(TEST_URLS.INVALID_GET_NO_DOMAIN).catch(e => e);
         });
 
         it('GET 404', function() {
             const axiosInstance = axios.create();
-            AdapterMiddlware(axiosInstance, [require('../adaptors/mongodb')(this.mongoOptions)]);
+            AxiosAdapterLogger(axiosInstance, [require('../plugs/mongodb')(this.client, this.mongoOptions)]);
 
             return axiosInstance.get(TEST_URLS.VALID_GET_200).catch(e => e);
         });
@@ -141,3 +134,4 @@ describe('Test Adaptors', function() {
     });
 
 });
+

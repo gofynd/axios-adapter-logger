@@ -20,8 +20,6 @@ function defaultResponseReducer(response) {
 }
 
 function defaultErrorReducer(error) {
-    // console.log('XXXXX --- ERROR ----')
-    // console.log(error);
     const response = error.response || {};
     const request = response.request || {};
 
@@ -64,7 +62,7 @@ function logError(error, adaptors, options) {
     return Promise.all(pArr);
 }
 
-function AdapterMiddlware(axiosInst, adaptors, options) {
+function AxiosdapterMiddlware(axiosInst, adaptors, options) {
     options = options || {};
     adaptors = adaptors || [];
 
@@ -76,5 +74,6 @@ function AdapterMiddlware(axiosInst, adaptors, options) {
         });
 }
 
-AdapterMiddlware.defaultResponseReducer = defaultResponseReducer;
-module.exports = AdapterMiddlware;
+AxiosdapterMiddlware.defaultResponseReducer = defaultResponseReducer;
+module.exports = AxiosdapterMiddlware;
+

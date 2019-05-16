@@ -1,7 +1,5 @@
-function MongoDBAdapter(options) {
+function PostgresPlug(client, options) {
     options = options || {};
-    const client = options.client;
-
 
     if(!client) {
         throw new Error('mongodb client is required');
@@ -18,4 +16,4 @@ function MongoDBAdapter(options) {
     };
 }
 
-module.exports = MongoDBAdapter;
+module.exports = PostgresPlug;
