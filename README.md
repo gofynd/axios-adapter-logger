@@ -130,7 +130,6 @@ $ npm test
 Maintainer - [Jigar Dafda](https://github.com/jigardafda)
 
 ## License
-----
 
 MIT License
 
