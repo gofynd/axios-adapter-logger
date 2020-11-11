@@ -40,7 +40,7 @@ const axios = require('axios');
 const AxiosAdapterLogger = require('axios-adapter-logger');
 const axiosInstance = axios.create();
 AxiosAdapterLogger(axiosInstance, [
-    require('../adaptors/console')()
+    require('../plug/console')()
 ]);
 
 axiosInstance.get('https://postman-echo.com/get?foo1=bar1&foo2=bar2')
@@ -57,7 +57,7 @@ const options = {
     format: 'ndjson' // possible options: ndjson or csv
 };
 AxiosAdapterLogger(axiosInstance, [
-    require('axios-adapter-logger/adaptors/file')(filePath, options)
+    require('axios-adapter-logger/plug/file')(filePath, options)
 ]);
 
 axiosInstance.get('https://postman-echo.com/get?foo1=bar1&foo2=bar2')
@@ -79,7 +79,7 @@ MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
     console.log('Database connected');
 
     AxiosAdapterLogger(axiosInstance, [
-        require('axios-adapter-logger/adaptors/mongodb')(client, 'test_database', 'test_req_logs_coll')
+        require('axios-adapter-logger/plug/mongodb')(client, 'test_database', 'test_req_logs_coll')
     ]);
 
     axiosInstance.get('https://postman-echo.com/get?foo1=bar1&foo2=bar2');
@@ -100,7 +100,7 @@ const axiosInstance = axios.create();
 const client = new Client();
 
 AxiosAdapterLogger(axiosInstance, [
-    require('axios-adapter-logger/adaptors/postgres')(client, 'test-table')
+    require('axios-adapter-logger/plug/postgres')(client, 'test-table')
 ]);
 
 axiosInstance.get('https://postman-echo.com/get?foo1=bar1&foo2=bar2');
